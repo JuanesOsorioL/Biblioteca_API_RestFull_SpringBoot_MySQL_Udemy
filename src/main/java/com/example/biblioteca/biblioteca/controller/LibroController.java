@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/biblioteca/libro")
+@RequestMapping("/api/v1/biblioteca/libros")
 public class LibroController {
 
     @Autowired
@@ -18,7 +20,17 @@ public class LibroController {
 
     @PostMapping("/save")
     public ResponseEntity<LibroDTO> createLibro(@RequestBody LibroDTO libroDto) {
-        return new ResponseEntity<>(libroService.save(libroDto), HttpStatus.CREATED);
+        return libroService.save(libroDto)
+                //.map(fullLibroDTO -> ResponseEntity.ok(fullLibroDTO))
+                .map(savedLibro -> {
+                    URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                            .path("/{id}")
+                            .buildAndExpand(savedLibro.getId()) //
+                            .toUri();
+                    return ResponseEntity.created(location).body(savedLibro);
+                })
+                .orElseGet(() -> ResponseEntity.notFound().build());
+
     }
 
     @GetMapping("/getAll")

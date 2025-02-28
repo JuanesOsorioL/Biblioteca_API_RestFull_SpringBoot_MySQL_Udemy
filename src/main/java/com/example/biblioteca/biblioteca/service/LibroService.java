@@ -1,6 +1,7 @@
 package com.example.biblioteca.biblioteca.service;
 
 import com.example.biblioteca.biblioteca.dto.LibroDTO;
+import com.example.biblioteca.biblioteca.repository.AutorRepository;
 import com.example.biblioteca.biblioteca.repository.LibroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,8 +18,17 @@ public class LibroService {
     @Autowired
     private FabricaLibroService fabricaLibroService;
 
-    public LibroDTO save(LibroDTO libroDTO) {
-        return fabricaLibroService.crearLibroDTO(libroRepository.save(fabricaLibroService.crearLibro(libroDTO)));
+    @Autowired
+    private AutorRepository autorRepository;
+
+    @Autowired
+    private FabricaAutorService fabricaAutorService;
+
+    public Optional<LibroDTO> save(LibroDTO libroDTO) {
+        return autorRepository.findById(libroDTO.getIdAutor()).map(autor -> {
+            libroDTO.setAutorDTO(fabricaAutorService.crearAutorDTO(autor));
+            return fabricaLibroService.crearLibroDTO(libroRepository.save(fabricaLibroService.crearLibro(libroDTO)));
+        });
     }
 
     public List<LibroDTO> findAll() {

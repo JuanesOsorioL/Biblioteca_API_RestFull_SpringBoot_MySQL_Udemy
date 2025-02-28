@@ -19,6 +19,7 @@ public class LibroDTO {
     private BigDecimal precio;
     private LocalDate fechaEdicion;
     private AutorDTO autorDTO;
+    private Integer idAutor;
 
     public LibroDTO(Libro libro) {
         this.id = libro.getId();
