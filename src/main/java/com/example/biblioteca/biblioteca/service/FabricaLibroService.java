@@ -1,6 +1,5 @@
 package com.example.biblioteca.biblioteca.service;
 
-import com.example.biblioteca.biblioteca.dto.AutorDTO;
 import com.example.biblioteca.biblioteca.dto.LibroDTO;
 import com.example.biblioteca.biblioteca.model.Libro;
 import org.springframework.stereotype.Service;
@@ -19,9 +18,9 @@ public class FabricaLibroService {
         return new LibroDTO(libro);
     }
 
-    public List<LibroDTO> listarLibrosDTO(List<Libro> ListaLibros) {
-        List<LibroDTO> ListaLibroDTO = new ArrayList<>();
-        ListaLibros.forEach(libro -> {ListaLibroDTO.add(crearLibroDTO(libro));});
-                return ListaLibroDTO;
+    public List<LibroDTO> listarLibrosDTO(List<Libro> listaLibros) {
+        List<LibroDTO> listaLibroDTO = new ArrayList<>();
+        listaLibros.forEach(libro -> listaLibroDTO.add(crearLibroDTO(libro)));
+        return listaLibroDTO;
     }
 }

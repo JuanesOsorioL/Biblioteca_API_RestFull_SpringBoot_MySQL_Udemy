@@ -22,7 +22,7 @@ public class AutorController {
     }
 
     @GetMapping("/findAll")
-    public ResponseEntity<List<AutorDTO>> findAll() {
+    public ResponseEntity<List<AutorDTO>> getAll() {
         return new ResponseEntity<>(autorService.findAll(), HttpStatus.OK);
     }
 
@@ -40,7 +40,7 @@ public class AutorController {
     @GetMapping("/findById/{id}")
     public ResponseEntity<AutorDTO> findById(@PathVariable Integer id) {
         return autorService.findById(id)
-                .map(autordto -> ResponseEntity.ok(autordto))
+                .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 /*
@@ -55,9 +55,9 @@ public class AutorController {
     }
 */
     @DeleteMapping("/deleteOptional/{id}")
-    public ResponseEntity<AutorDTO> eliminar(@PathVariable Integer id) {
+    public ResponseEntity<AutorDTO> delete(@PathVariable Integer id) {
         return autorService.deleteAutorByID(id)
-                .map(autordto->ResponseEntity.ok(autordto))
+                .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

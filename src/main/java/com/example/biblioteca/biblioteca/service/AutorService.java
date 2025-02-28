@@ -21,7 +21,7 @@ public class AutorService {
     }
 
     public List<AutorDTO> findAll() {
-        return fabricaAutorService.crearAutoresDTO_mio(autorRepository.findAll());
+        return fabricaAutorService.listarAutoresDTO(autorRepository.findAll());
     }
 
     /* Antes

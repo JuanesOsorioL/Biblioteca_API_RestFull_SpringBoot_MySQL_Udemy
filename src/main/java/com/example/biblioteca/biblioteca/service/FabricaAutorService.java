@@ -19,7 +19,7 @@ public class FabricaAutorService {
         return new AutorDTO(autor);
     }
 
-    public List<AutorDTO> crearAutoresDTO_mio(List<Autor> listaAutores) {
+    public List<AutorDTO> listarAutoresDTO(List<Autor> listaAutores) {
         List<AutorDTO> autoresDTO = new ArrayList<>();
         listaAutores.forEach(autor -> autoresDTO.add(crearAutorDTO(autor)));
         return autoresDTO;
@@ -27,7 +27,7 @@ public class FabricaAutorService {
 
     public List<AutorDTO> crearAutoresDTO_udemy(List<Autor> listaAutores) {
         List<AutorDTO> autoresDTO = new ArrayList<>();
-        listaAutores.stream().forEach(autor -> autoresDTO.add(crearAutorDTO(autor)));
+        listaAutores.forEach(autor -> autoresDTO.add(crearAutorDTO(autor)));
         return autoresDTO;
     }
 
