@@ -1,5 +1,6 @@
 package com.example.biblioteca.biblioteca.model;
 
+import com.example.biblioteca.biblioteca.dto.AutorDTO;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,4 +16,11 @@ public class Autor {
     private String nombre;
     private String apellido;
     private String telefono;
+
+    public Autor(AutorDTO autorDTO) {
+        this.id = autorDTO.getId();
+        this.nombre = autorDTO.getNombre();
+        this.apellido = autorDTO.getApellido();
+        this.telefono = autorDTO.getTelefono();
+    }
 }
