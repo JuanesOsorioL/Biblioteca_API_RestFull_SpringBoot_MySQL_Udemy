@@ -19,7 +19,7 @@ public class FabricaLibroService {
         return new LibroDTO(libro);
     }
 
-    public List<LibroDTO> listarLibros(List<Libro> ListaLibros) {
+    public List<LibroDTO> listarLibrosDTO(List<Libro> ListaLibros) {
         List<LibroDTO> ListaLibroDTO = new ArrayList<>();
         ListaLibros.forEach(libro -> {ListaLibroDTO.add(crearLibroDTO(libro));});
                 return ListaLibroDTO;
